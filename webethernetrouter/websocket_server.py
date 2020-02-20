@@ -1,5 +1,6 @@
 import asyncio
 import os
+import websockets
 from functools import partial
 from .lan_segment import LanSegment
 from .client import Client
@@ -10,7 +11,7 @@ last_addr = 0
 
 writers = dict()
 
-class TCPClient(Client):
+class WebClient(Client):
     def __init__(self, lan_segment, address, reader, writer):
         super().__init__(lan_segment, address)
         
@@ -40,7 +41,7 @@ async def handle_client(lan_segment, reader, writer):
     last_addr += 1
     addr = last_addr
 
-    client = TCPClient(lan_segment, addr, reader, writer)
+    client = WebClient(lan_segment, addr, reader, writer)
 
     with client:
         await client.run()

@@ -36,7 +36,7 @@ async def route_to_peer(client, packet):
         for a,p in client.lan_segment.clients.items():
             logger.warning("  Peer %s: %s", a, util.hex_str(p.mac_address))
     else:
-        logger.warning("Routing packet to %s", util.hex_str(packet.dst))
+        logger.debug("Routing packet to %s", util.hex_str(packet.dst))
         await peer.send_packet(packet)
 
 async def broadcast(client, packet):
